@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install Packages
-        run: Rscript -e "install.packages(c('FactoMineR','factoextra', 'corrplot', 'plotly'))"
       - name: Generate website
         run: Rscript render_site.R
       - name: GitHub Pages action
