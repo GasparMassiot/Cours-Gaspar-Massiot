@@ -1,0 +1,31 @@
+---
+title: "R : GMN3A"
+description: |
+  Ce site contient les liens vers les données et les supports de cours pour la formation. 
+output: 
+  html_document:
+   toc: false
+   number_sections: false
+   highlight: tango
+   css: style.css
+--- 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+```
+
+
+# Installation logiciels pour la formation
+
+Il est préférable de commencer par installer R avant d’installer RStudio.
+Installation de R
+
+Windows : le premier lien sur la page  http://cran.r-project.org/bin/windows/base/  permet de télécharger programme d’installation. Une fois le programme d’installation lancé, il suffira d’installer R avec les options par défaut. 
+Mac OS X :les fichiers d’installation sont disponibles à http://cran.r-project.org/bin/macosx/.
+
+Linux :  R est disponible dans le  gestionnaire de paquets, cela pouvant dépendre d’une distribution de Linux à une autre.
+Installation de RStudio
+
+La page  http://www.rstudio.com/products/rstudio/download/ permet de télécharger  la dernière version stable de Rstudio. Il faut choisir l’installateur correspondant à votre système d’exploitation et suivre la procédure.

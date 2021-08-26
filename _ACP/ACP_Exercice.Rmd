@@ -1,0 +1,82 @@
+---
+title: "Analyse de la composition de 35 eaux minérales"
+author: "Gaspar Massiot"
+date: "6/25/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, warning = F, message = F}
+rm(list = ls())
+library("knitr") # pour avoir un format table dans les sorties
+library("ggplot2") # pour avoir de "beaux"" graphiques
+library("FactoMineR") # pour effectuer l'ACP
+library("factoextra") # pour extraire et visualiser les résultats issus de FactoMineR
+library("corrplot") # pour avoir une représentation des corrélations
+library("plotly")
+```
+
+## Présentation des données
+
+```{r}
+EauxMinerales = read.csv2("data/EauxMinerales.csv", dec=",", row.names=1)
+knitr::kable(head(EauxMinerales))
+dim(EauxMinerales)
+# Statistiques simples
+summary(EauxMinerales)
+# Corrélation
+correlation=cor(EauxMinerales[-33,1:(dim(EauxMinerales)[2]-1)])
+kable(correlation,digits=2)
+# Visualisation des corrélations
+corrplot(correlation)
+```
+
+## Analyse en composantes principales
+
+```{r}
+resPCA=PCA(EauxMinerales[-33,], scale.unit=T, quali.sup=9, graph = F)
+# les variables supplémentaires sont intégrées au graphe mais ne sont pas
+# prises en compte pour l'ACP
+```
+
+### Analyse de l'inertie des axes factoriels
+
+```{r}
+get_eigenvalue(resPCA)
+fviz_eig(resPCA, addlabels = T) + geom_hline(yintercept = 10, color = "red")
+```
+
+### Etude des variables
+
+```{r}
+var=get_pca_var(resPCA)
+ggplotly(fviz_pca_var(resPCA, geom = c("text","arrow"), col.var = "cos2", axes=1:2) + theme_classic())
+fviz_pca_var(resPCA, geom = c("text","arrow"), col.var = "cos2", axes=3:4) + theme_classic()
+```
+
+### Etude des individus
+
+```{r}
+ind=get_pca_ind(resPCA)
+cos2 = rowSums(resPCA$ind$cos2[, 1:2])
+fviz_pca_ind (resPCA, col.ind = "cos2",axes=1:2,
+gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+repel = TRUE # pour éviter le chevauchement de texte
+)
+cos2 = rowSums(resPCA$ind$cos2[,3:4])
+fviz_pca_ind (resPCA, col.ind = "cos2",axes=3:4,
+gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+repel = TRUE)
+```
+
+### Biplot
+
+```{r}
+fviz_pca_biplot(resPCA, repel = TRUE,
+col.var = "#2E9FDF", # Couleur des variables
+col.ind = "#696969" # Couleur des individus
+)
+```

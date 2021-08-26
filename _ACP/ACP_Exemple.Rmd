@@ -1,0 +1,103 @@
+---
+title: "Analyse en Composantes Principales (ACP) avec FactoMineR"
+author: "Gaspar Massiot"
+date: "6/25/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, warning = F, message = F}
+rm(list = ls())
+library("knitr") # pour avoir un format table dans les sorties
+library("ggplot2") # pour avoir de "beaux"" graphiques
+library("FactoMineR") # pour effectuer l'ACP
+library("factoextra") # pour extraire et visualiser les résultats issus de FactoMineR
+library("corrplot") # pour avoir une représentation des corrélations
+```
+
+## Présentation des données
+
+On s'intéresse aux températures moyennes dans 16 villes de France selon le mois de l'année. Pour chacune des 16 villes étudiées, on dispose :
+
+-   des températures moyennes sur les mois de Janvier à Décembre,
+
+-   de la région d'appartenance de la ville (SO = Sud Ouest, NO = Nord Ouest, Ce = Centre, NE = Nord Est et SE = Sud Est)
+
+-   de la latitude et la longitude exactes du centre de la ville,
+
+-   de la température annuelle moyenne et de l'amplitude de températures observées sur l'année
+
+```{r data, echo=TRUE}
+temperatures = read.csv2("data/Temperatures_16_Villes.csv", dec=",", row.names=1)
+```
+
+```{r}
+# Variations des variables actives (de l'ACP ? faire)
+# Positions des variables actives
+names(temperatures)
+Act = 1:12   
+names(temperatures[,Act])
+
+# Variations des températures brutes
+boxplot(temperatures[,Act], las=2,main="Variations des températures mensuelles")
+# Variations des températures centrées
+boxplot(scale(temperatures[,Act],scale=F), las=2, main="Variations des tpr mensuelles centrées")
+# Variations des températures centrées réduites
+boxplot(scale(temperatures[,Act]), las=2, main="Variations des tpr mensuelles centrées-réduites")
+
+# Corrélations
+correlation=cor(temperatures[,c(Act,14:17)])
+kable(correlation,digits=2)
+# Visualisation des corrélations
+corrplot(correlation)
+```
+
+## Analyse en composantes principales
+
+```{r}
+resPCA=PCA(temperatures, scale.unit=T, quali.sup=13, quanti.sup=14:17, graph = F)
+# les variables supplémentaires sont intégrées au graphe mais ne sont pas
+# prises en compte pour l'ACP
+```
+
+### Analyse de l'inertie des axes factoriels
+
+```{r}
+get_eigenvalue(resPCA)
+fviz_eig(resPCA, addlabels = T) + geom_hline(yintercept = 10, color = "red") + labs(title = "Températures moyennes")
+```
+
+### Etude des variables
+
+```{r}
+var=get_pca_var(resPCA)
+fviz_pca_var(resPCA, geom = c("text","arrow"), col.var = "cos2", axes=1:2) + theme_classic()
+fviz_pca_var(resPCA, geom = c("text","arrow"), col.var = "cos2", axes=3:4) + theme_classic()
+```
+
+### Etude des individus
+
+```{r}
+ind=get_pca_ind(resPCA)
+cos2 = rowSums(resPCA$ind$cos2[, 1:2])
+fviz_pca_ind (resPCA, col.ind = "cos2",axes=1:2,
+gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+repel = TRUE # pour éviter le chevauchement de texte
+)
+cos2 = rowSums(resPCA$ind$cos2[,3:4])
+fviz_pca_ind (resPCA, col.ind = "cos2",axes=3:4,
+gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+repel = TRUE)
+```
+
+### Biplot
+
+```{r}
+fviz_pca_biplot(resPCA, repel = TRUE,
+col.var = "#2E9FDF", # Couleur des variables
+col.ind = "#696969" # Couleur des individus
+)
+```
