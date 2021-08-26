@@ -11,3 +11,7 @@ for(f_ in filenames){
   system(glue::glue( 'rm -rf {stringr::str_remove(f_, ".Rmd")}_files'))
   rmarkdown::render(f_)
 }
+
+for (d_ in dirs){
+  system( glue::glue( 'cp -rf d_ render/. '))
+}
