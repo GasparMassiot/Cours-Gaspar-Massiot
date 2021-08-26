@@ -1,4 +1,4 @@
-system('mkdir -p render') 
+system('mkdir -p build') 
 
 rmarkdown::render_site(encoding = 'UTF-8')
 
@@ -17,9 +17,5 @@ for(f_ in filenames){
 dirs <- dir('.', pattern = "^_[^(site)]", full.names = T)
 
 for (d_ in dirs){
-  system( glue::glue( 'cp -rf {d_} render/. '))
-}
-
-for(d_ in dirs){
-  print(glue::glue( 'cp -rf {d_} render/. '))
+  system( glue::glue( 'cp -rf {d_} build/. '))
 }
