@@ -28,5 +28,7 @@ On s'intéresse aux températures moyennes dans 16 villes de France selon le moi
 ```{r data, echo=TRUE}
 getwd()
 list.files(getwd())
-# temperatures = read.csv2("data/Temperatures_16_Villes.csv", dec=",", row.names=1)
+list.files("..")
+list.files("../..")
+# temperatures = read.csv2("../data/Temperatures_16_Villes.csv", dec=",", row.names=1)
 ```
