@@ -172,9 +172,3 @@ fviz_ca_col(resAfc, geom = c("text","arrow"), col.var = "cos2", axes=3:4) + them
 
 ### Biplot
 
-```{r}
-fviz_pca_biplot(resPCA, repel = TRUE,
-col.var = "#2E9FDF", # Couleur des variables
-col.ind = "#696969" # Couleur des individus
-)
-```
