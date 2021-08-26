@@ -31,7 +31,7 @@ On s'intéresse aux températures moyennes dans 16 villes de France selon le moi
 -   de la température annuelle moyenne et de l'amplitude de températures observées sur l'année
 
 ```{r data, echo=TRUE}
-temperatures = read.csv2("data/Temperatures_16_Villes.csv", dec=",", row.names=1)
+temperatures = read.csv2("https://raw.githubusercontent.com/GasparMassiot/GMN3A/master/data/Temperatures_16_Villes.csv", dec=",", row.names=1)
 ```
 
 ```{r}

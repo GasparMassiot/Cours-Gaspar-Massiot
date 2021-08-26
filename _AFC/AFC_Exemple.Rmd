@@ -36,9 +36,9 @@ Trois tableaux sont finalement fournis :
 
 ```{r data, echo=TRUE}
 # Ouverture et description des fichiers de données
-Esp = read.csv2('data/DunesEsp.csv', row.names = 1)
-Env = read.csv2('data/DunesEnv.csv', row.names = 1)
-Veg = read.csv2('data/DunesVeg.csv')
+Esp = read.csv2('https://raw.githubusercontent.com/GasparMassiot/GMN3A/master/data/DunesEsp.csv', row.names = 1)
+Env = read.csv2('https://raw.githubusercontent.com/GasparMassiot/GMN3A/master/data/DunesEnv.csv', row.names = 1)
+Veg = read.csv2('https://raw.githubusercontent.com/GasparMassiot/GMN3A/master/data/DunesVeg.csv')
 ```
 
 ## Création d'une table de contingence pour l'AFC

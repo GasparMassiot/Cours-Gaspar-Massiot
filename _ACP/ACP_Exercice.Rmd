@@ -22,7 +22,7 @@ library("plotly")
 ## Présentation des données
 
 ```{r}
-EauxMinerales = read.csv2("data/EauxMinerales.csv", dec=",", row.names=1)
+EauxMinerales = read.csv2("https://raw.githubusercontent.com/GasparMassiot/GMN3A/master/data/EauxMinerales.csv", dec=",", row.names=1)
 knitr::kable(head(EauxMinerales))
 dim(EauxMinerales)
 # Statistiques simples
