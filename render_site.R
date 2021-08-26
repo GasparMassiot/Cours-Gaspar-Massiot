@@ -23,5 +23,6 @@ dirs <- dir('.', pattern = "^_[^(site)]", full.names = T)
 for (d_ in dirs){
   system( glue::glue( 'cp -rf {d_} build/. '))
   print(d_)
-  list.files(d_)
+  print(list.files(d_))
+  print(list.files("build"))
 }
