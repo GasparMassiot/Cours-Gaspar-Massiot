@@ -12,6 +12,8 @@ for(f_ in filenames){
   rmarkdown::render(f_)
 }
 
+dirs <- dir('.', pattern = "^_[^(site)]")
+
 for (d_ in dirs){
   system( glue::glue( 'cp -rf d_ render/. '))
 }
