@@ -8,7 +8,7 @@ navbar:
     icon: fa-laptop
     menu:
     - text: "ACP"
-      href: _ACP/ACP_Exemple.html
+      href: ACP_Exemple.html
   right:
   - text: "Github"
     icon: fab fa-github
