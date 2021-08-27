@@ -29,5 +29,6 @@ On s'intéresse aux températures moyennes dans 16 villes de France selon le moi
 getwd()
 list.files(getwd())
 # list.files("../data")
-temperatures <- read.csv2("https://raw.githubusercontent.com/GasparMassiot/GMN3A/master/data/Temperatures_16_Villes.csv", row.names=1)
+# temperatures <- read.csv2("https://raw.githubusercontent.com/GasparMassiot/GMN3A/master/data/Temperatures_16_Villes.csv", row.names=1)
+temperatures2 <- read.csv2("https://raw.githubusercontent.com/MarieEtienne/ModStat/master/data/FreqCardiaqueEq.txt", header = T)
 ```
