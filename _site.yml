@@ -1,6 +1,6 @@
 name: "R : GMN3A"
 title: "GMN3A"
-output_dir: "./build"
+output_dir: "."
 navbar:
   title: 'GMN3A'
   left:
