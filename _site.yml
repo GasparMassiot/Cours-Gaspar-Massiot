@@ -8,11 +8,14 @@ navbar:
     icon: fa-laptop
     menu:
     - text: "Supports de cours ACP"
-      href: ./_EMS_ADD/1. Cours/1_Cours_ACP.pdf
+      href: ./ACP_Exemple.html
     - text: "TD ACP html"
       href: ./_ACP/ACP_Exemple.html
     - text: "TP ACP html"
       href: ./_EMS_ADD/Mes Sujets TP/TP1.html
+  - text: "Données"
+    menu:
+    - text:
   right:
   - text: "Github"
     icon: fab fa-github
