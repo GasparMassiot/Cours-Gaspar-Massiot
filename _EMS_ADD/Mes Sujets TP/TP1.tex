@@ -1,0 +1,474 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Analyse de données Travaux Dirigés et Pratiques},
+  pdfauthor={Fiche 1 : Rappels de Statistiques Descriptives},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Analyse de données Travaux Dirigés et Pratiques}
+\author{Fiche 1 : Rappels de Statistiques Descriptives}
+\date{}
+
+\begin{document}
+\maketitle
+
+\subsection{Exercice 1}\label{exercice-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Pour chacune des variables suivantes, préciser son type :
+\end{enumerate}
+
+\begin{minipage}[t]{0.5\textwidth}
+\begin{itemize}
+\item Revenu annuel           
+\item Sexe                    
+\item Etat matrimonial        
+\item Lieu de résidence       
+\item Pointure de chaussures 
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{itemize}
+\item Citoyenneté
+\item Couleur des yeux
+\item Nombre de langues parlées
+\item Âge
+\item Tour de taille
+\end{itemize}
+\end{minipage}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Rappeler quelques mesures de la tendance centrale et leurs principales
+  caractéristiques (qualités et défauts).
+\item
+  Même question pour des mesures de la dispersion.
+\item
+  Lorsque la distribution est symétrique, que peut-on dire de la
+  moyenne, la médiane et le mode ?
+\item
+  Quelle est la différence entre valeurs manquantes, valeurs aberrantes
+  et valeurs extrêmes ?
+\end{enumerate}
+
+\subsection{Exercice 2 Nettoyage et prétraitement des
+données}\label{exercice-2-nettoyage-et-pruxe9traitement-des-donnuxe9es}
+
+\emph{Cet exercice sera effectué sous le logiciel R.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Créer un dossier \texttt{TP\_StatDes} dans votre espace personnel.
+  Créer un sous-dossier \texttt{Données} et un sous dossier
+  \texttt{Script} dans ce dossier.
+\item
+  Télécharger les données \texttt{Recensement\_12.csv} sur Moodle ou sur
+  le répertoire \texttt{COMMUN}. Ces données sont un échantillon de 599
+  foyers du recensement effectué en 2012 aux Etats Unis, décrits par 11
+  variables. Enregistrer ces données dans le sous dossier
+  \texttt{données} du dossier \texttt{TP\_StatDes}.
+\item
+  Ouvrir \texttt{RStudio} et créer un nouveau projet :
+  \texttt{File\ \textgreater{}\ New\ Project...}. Choisir
+  \texttt{Existing\ Directory} et sélectionner le dossier
+  \texttt{TP\_StatDes}.
+
+  \includegraphics{Creer_projet.png}
+\item
+  Dans \texttt{RStudio}, créer un nouveau script \texttt{R} nommé
+  \texttt{TP1} :
+  \texttt{File\ \textgreater{}\ New\ File\ \textgreater{}\ R\ Script}
+  (raccourci clavier \texttt{Ctrl+Maj+N}) et l'enregistrer dans le sous
+  dossier \texttt{script} du dossier \texttt{TP\_StatDes}.
+\item
+  Charger les données à l'aide de la commande suivante : à quoi servent
+  les options \texttt{row.names\ =\ 1} et
+  \texttt{stringsAsFactors\ =\ T} ?
+\end{enumerate}
+
+\emph{Bien qu'en anglais, l'aide de \texttt{R} est relativement bien
+conçue. Il est souvent utile de s'y référer pour comprendre
+l'utilisation d'une fonction donnée. On pourra par exemple lancer la
+commande \texttt{help(read.csv2)}, pour avoir plus de détails sur cette
+fonction. Le raccourcis clavier pour accéder à l'aider est \texttt{F1}.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Chargement des données}
+\NormalTok{Recensement\_12 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Données/Recensement\_12.csv"}\NormalTok{, }\AttributeTok{row.names =} \DecValTok{1}\NormalTok{, }\AttributeTok{stringsAsFactors =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  A l'aide des fonctions suivantes, donner une description rapide des
+  données; Existe-t-il des valeurs manquantes ou aberrantes ?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# fonction str, permet d\textquotesingle{}avoir un aperçu du type des variables}
+\FunctionTok{str}\NormalTok{(Recensement\_12)}
+\CommentTok{\# fontion summary de base}
+\FunctionTok{summary}\NormalTok{(Recensement\_12)}
+\CommentTok{\# fonction skim, alternative à summary et str}
+\NormalTok{skimr}\SpecialCharTok{::}\FunctionTok{skim}\NormalTok{(Recensement\_12)}
+\CommentTok{\# fonction glimpse du package dplyr}
+\NormalTok{dplyr}\SpecialCharTok{::}\FunctionTok{glimpse}\NormalTok{(Recensement\_12)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Il est possible que les package \texttt{skimr} et \texttt{dplyr}
+ne soient pas installés sur vos machines, dans ce cas les appels
+\texttt{install.packages("skimr")} et \texttt{install.packages("dplyr")}
+les installeront. Une fois installés, on peut charger les package à
+l'aide des invites \texttt{library(skimr)} et \texttt{library(dplyr)},
+cela permet d'éviter de répéter les \texttt{dplyr::} et \texttt{skimr::}
+dans le code précédent.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\item
+  Calculer le pourcentage de valeurs manquantes dans la table. On pourra
+  par exemple utiliser les fonctions de base de \texttt{R} suivantes :
+  \texttt{is.na}, \texttt{sum}, \texttt{nrow} et \texttt{ncol}.
+\item
+  On souhaite maintenant éliminer les variables ayant plus de 70\% de
+  valeurs manquantes et dans un deuxième temps retirer les individus
+  ayant plus de 60\% de valeurs manquantes. Cela vous semble-t-il
+  judicieux pour l'analyse ? Quelles sont les conséquences d'une telle
+  opération ? Pour coder cette opération on peut utiliser les fonctions
+  de base de \texttt{R} telles que \texttt{colSums} et \texttt{rowSums},
+  on peut aussi utiliser les fonctions du \texttt{tidyverse} tel que
+  présenté ci-après.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Recensement\_12 }\OtherTok{\textless{}{-}}\NormalTok{ Recensement\_12 }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\#\# select permet de sélectionner des variables}
+  \DocumentationTok{\#\#\# where permet d\textquotesingle{}appliquer une condition définie par une formule}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{where}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.x))}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(.x)}\SpecialCharTok{\textless{}}\FloatTok{0.7}\NormalTok{))}
+
+\NormalTok{Recensement\_12 }\OtherTok{\textless{}{-}}\NormalTok{ Recensement\_12 }\SpecialCharTok{\%\textgreater{}\%} 
+  \CommentTok{\# Calcul du pourcentage de NA par individu}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{percentage\_NA =} \FunctionTok{rowSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(Recensement\_12))}\SpecialCharTok{/}\FunctionTok{ncol}\NormalTok{(Recensement\_12)) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# Sélection des individus selon la condition}
+  \FunctionTok{filter}\NormalTok{(percentage\_NA}\SpecialCharTok{\textless{}}\FloatTok{0.6}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# Suppression de la variable percentage\_NA}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{percentage\_NA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\item
+  Séparer la table de données obtenue en 2 tables
+
+  \begin{itemize}
+  \tightlist
+  \item
+    une table \texttt{quali} contenant toutes les variables qualitatives
+  \item
+    une table \texttt{quanti} contenant toutes les variables
+    quantitatives.
+  \end{itemize}
+\end{enumerate}
+
+\emph{On pourra s'inspirer du code précédant et utiliser les fonctions
+\texttt{select} et \texttt{where} du \texttt{tidyverse} ainsi que des
+fonctions \texttt{is.numeric} et \texttt{is.factor} de \texttt{Rbase}.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\item
+  On souhaite imputer les données manquantes dans la base
+  \texttt{quanti}, quelle(s) méthode(s) connaissez-vous pour ce faire ?
+\item
+  Existe-t-il un moyen de faire la même chose pour les données
+  manquantes de la base \texttt{quali} ?
+\item
+  La fonction \texttt{na.aggregate} du package \texttt{zoo} permet
+  d'imputer les données (e.g.~moyenne ou médiane). Utilisez la pour
+  créer la table \texttt{dat} à partir de la table \texttt{quanti} et
+  dans laquelle les valeurs manquantes ont été imputées par la médiane
+  pour chaque variable.
+\end{enumerate}
+
+\subsection{Exercice 3 Statistiques descriptives
+univariées}\label{exercice-3-statistiques-descriptives-univariuxe9es}
+
+\emph{Cet exercice sera effectué sous le logiciel R}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Variables qualitatives}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    Pour chaque variable du jeu de données \texttt{quali}, choisir la
+    représentation la plus adaptée. On pourra s'inspirer du site
+    \href{https://r-graph-gallery.com/}{R Graph Gallery}.
+  \item
+    On rappelle que la commande \texttt{prop.table(table(x))} permet de
+    calculer les fréquences de chaque modalité du vecteur \texttt{x} et
+    que les fonctions \texttt{pie} et \texttt{barplot} permettent de
+    construire respectivement un diagramme circulaire et un diagramme en
+    barres. Les fonctions \texttt{geom\_bar} et \texttt{geom\_col} du
+    package \texttt{ggplot2} permmettent également de construire de tels
+    graphiques.
+  \item
+    Interpréter les graphiques obtenus.
+  \end{enumerate}
+\item
+  \textbf{Variables quantitatives}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Interpréter les sorties des commandes suivantes
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fonction summary}
+\FunctionTok{summary}\NormalTok{(dat)}
+
+\CommentTok{\# Fonction skim du package skimr}
+\NormalTok{skimr}\SpecialCharTok{::}\FunctionTok{skim}\NormalTok{(dat)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{1}
+  \tightlist
+  \item
+    Taper les commandes
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{var}\NormalTok{(dat[,}\DecValTok{1}\NormalTok{])}
+\FunctionTok{sum}\NormalTok{((dat[,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{{-}}\FunctionTok{mean}\NormalTok{(dat[,}\DecValTok{1}\NormalTok{]))}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\FunctionTok{nrow}\NormalTok{(dat))}
+\end{Highlighting}
+\end{Shaded}
+
+  Que remarquez vous ? Utiliser l'aide de la fonction \texttt{var} afin
+  de trouver une explication et adapter la deuxième ligne le cas
+  échéant.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{2}
+  \item
+    Pour chaque variable quantitative, choisir la représentation la plus
+    adaptée. On pourra s'inspirer du site
+    \href{https://r-graph-gallery.com/}{R Graph Gallery}.
+  \item
+    Suivant le type de graphique choisi, on pourra utiliser les
+    fonctions suivantes :
+  \end{enumerate}
+
+  \begin{longtable}[]{@{}
+    >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3833}}
+    >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2500}}
+    >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3667}}@{}}
+  \toprule\noalign{}
+  \begin{minipage}[b]{\linewidth}\centering
+  Diagramme en barres
+  \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+  Histogramme
+  \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+  Boîte à moustaches
+  \end{minipage} \\
+  \midrule\noalign{}
+  \endhead
+  \bottomrule\noalign{}
+  \endlastfoot
+  \texttt{barplot} & \texttt{hist} & \texttt{boxplot} \\
+  \texttt{geom\_bar} ou \texttt{geom\_col} & \texttt{geom\_histogram} ou
+  \texttt{geom\_density} & \texttt{geom\_boxplot} \\
+  \end{longtable}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{4}
+  \tightlist
+  \item
+    Interpréter les graphiques obtenus
+  \end{enumerate}
+\end{enumerate}
+
+\subsection{Exercice 4 Statistiques descriptives
+bivariées}\label{exercice-4-statistiques-descriptives-bivariuxe9es}
+
+\emph{Cet exercice sera effectué sous le logiciel R.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Indiquer les différents types d'outils statistiques utilisés pour
+  interpréter les liens éventuels entre 2 variables
+\item
+  Parmi les variables du jeu de données \texttt{Recensement\_12},
+  sélectionner plusieurs couples de variables et utiliser les outils
+  statistiques adéquats afin d'interpréter leurs relations. Les
+  commandes suivantes peuvent être utiles
+\end{enumerate}
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3014}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1781}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2740}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2466}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Table de contingence
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Corrélation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Boîte à moustaches
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Nuages de points
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{table(x,y)} & \texttt{cov(dat)}, \texttt{cor(dat)} &
+\texttt{boxplot(x\ \textasciitilde{}\ y)} & \texttt{plot(x,y)},
+\texttt{pairs(dat)} \\
+\texttt{dat\ \%\textgreater{}\%\ count(x,y)} &
+\texttt{corrplot(cor(dat))} &
+\texttt{ggplot(dat)\ +\ geom\_boxplot(aes(x,\ group\ =\ y))} &
+\texttt{ggplot(dat)\ +\ geom\_point(aes(x,\ y))} \\
+\end{longtable}
+
+\end{document}

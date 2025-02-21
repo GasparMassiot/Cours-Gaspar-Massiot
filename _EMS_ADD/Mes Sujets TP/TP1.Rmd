@@ -1,0 +1,238 @@
+---
+title: "Analyse de données Travaux Dirigés et Pratiques"
+author: 'Fiche 1 : Rappels de Statistiques Descriptives'
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Exercice 1
+
+1. Pour chacune des variables suivantes, préciser son type :
+
+\begin{minipage}[t]{0.5\textwidth}
+\begin{itemize}
+\item Revenu annuel           
+\item Sexe                    
+\item Etat matrimonial        
+\item Lieu de résidence       
+\item Pointure de chaussures 
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{itemize}
+\item Citoyenneté
+\item Couleur des yeux
+\item Nombre de langues parlées
+\item Âge
+\item Tour de taille
+\end{itemize}
+\end{minipage}
+
+2. Rappeler quelques mesures de la tendance centrale et leurs principales caractéristiques (qualités et défauts).
+
+3. Même question pour des mesures de la dispersion.
+
+4. Lorsque la distribution est symétrique, que peut-on dire de la moyenne, la médiane et le mode ?
+
+5. Quelle est la différence entre valeurs manquantes, valeurs aberrantes et valeurs extrêmes ?
+
+## Exercice 2 Nettoyage et prétraitement des données
+*Cet exercice sera effectué sous le logiciel R.*
+
+1. Créer un dossier `TP_StatDes` dans votre espace personnel. Créer un sous-dossier `Données` et un sous dossier `Script` dans ce dossier.
+
+2. Télécharger les données `Recensement_12.csv` sur Moodle ou sur le répertoire `COMMUN`. Ces données sont un échantillon de 599 foyers du recensement effectué en 2012 aux Etats Unis, décrits par 11 variables. Enregistrer ces données dans le sous dossier `données` du dossier `TP_StatDes`.
+
+3. Ouvrir `RStudio` et créer un nouveau projet : `File > New Project...`. Choisir `Existing Directory` et sélectionner le dossier `TP_StatDes`.
+<center>
+![](Creer_projet.png)
+</center>
+
+4. Dans `RStudio`, créer un nouveau script `R` nommé `TP1` : `File > New File > R Script` (raccourci clavier `Ctrl+Maj+N`) et l'enregistrer dans le sous dossier `script` du dossier `TP_StatDes`.
+
+5. Charger les données à l'aide de la commande suivante : à quoi servent les options `row.names = 1` et `stringsAsFactors = T` ?
+
+*Bien qu'en anglais, l'aide de `R` est relativement bien conçue. Il est souvent utile de s'y référer pour comprendre l'utilisation d'une fonction donnée. On pourra par exemple lancer la commande `help(read.csv2)`, pour avoir plus de détails sur cette fonction. Le raccourcis clavier pour accéder à l'aider est `F1`.*
+```{r, results = F}
+# Chargement des données
+Recensement_12 <- read.csv2("Données/Recensement_12.csv", row.names = 1, stringsAsFactors = T)
+```
+
+
+5. A l'aide des fonctions suivantes, donner une description rapide des données; Existe-t-il des valeurs manquantes ou aberrantes ?
+```{r, results = F}
+# fonction str, permet d'avoir un aperçu du type des variables
+str(Recensement_12)
+# fontion summary de base
+summary(Recensement_12)
+# fonction skim, alternative à summary et str
+skimr::skim(Recensement_12)
+# fonction glimpse du package dplyr
+dplyr::glimpse(Recensement_12)
+```
+*Il est possible que les package `skimr` et `dplyr` ne soient pas installés sur vos machines, dans ce cas les appels `install.packages("skimr")` et `install.packages("dplyr")` les installeront. Une fois installés, on peut charger les package à l'aide des invites `library(skimr)` et `library(dplyr)`, cela permet d'éviter de répéter les `dplyr::` et `skimr::` dans le code précédent.*
+
+6. Calculer le pourcentage de valeurs manquantes dans la table. On pourra par exemple utiliser les fonctions de base de `R` suivantes : `is.na`, `sum`, `nrow` et `ncol`.
+
+7. On souhaite maintenant éliminer les variables ayant plus de 70% de valeurs manquantes et dans un deuxième temps retirer les individus ayant plus de 60% de valeurs manquantes. Cela vous semble-t-il judicieux pour l'analyse ? Quelles sont les conséquences d'une telle opération ? Pour coder cette opération on peut utiliser les fonctions de base de `R` telles que `colSums` et `rowSums`, on peut aussi utiliser les fonctions du `tidyverse` tel que présenté ci-après.
+```{r, results = F}
+Recensement_12 <- Recensement_12 %>% 
+  ### select permet de sélectionner des variables
+  ### where permet d'appliquer une condition définie par une formule
+  select(where(~ sum(is.na(.x))/length(.x)<0.7))
+
+Recensement_12 <- Recensement_12 %>% 
+  # Calcul du pourcentage de NA par individu
+  mutate(percentage_NA = rowSums(is.na(Recensement_12))/ncol(Recensement_12)) %>%
+  # Sélection des individus selon la condition
+  filter(percentage_NA<0.6) %>%
+  # Suppression de la variable percentage_NA
+  select(-percentage_NA)
+```
+
+8. Séparer la table de données obtenue en 2 tables
+
+    - une table `quali` contenant toutes les variables qualitatives
+    - une table `quanti` contenant toutes les variables quantitatives.
+
+*On pourra s'inspirer du code précédant et utiliser les fonctions `select` et `where` du `tidyverse` ainsi que des fonctions `is.numeric` et `is.factor` de `Rbase`.*
+
+10. On souhaite imputer les données manquantes dans la base `quanti`, quelle(s) méthode(s) connaissez-vous pour ce faire ? 
+
+11. Existe-t-il un moyen de faire la même chose pour les données manquantes de la base `quali` ?
+
+12. La fonction `na.aggregate` du package `zoo` permet d'imputer les données (e.g. moyenne ou médiane). Utilisez la pour créer la table `dat` à partir de la table `quanti` et dans laquelle les valeurs manquantes ont été imputées par la médiane pour chaque variable.
+
+## Exercice 3 Statistiques descriptives univariées
+*Cet exercice sera effectué sous le logiciel R*
+
+1. **Variables qualitatives**
+
+    a. Pour chaque variable du jeu de données `quali`, choisir la représentation la plus adaptée. On pourra s'inspirer du site [R Graph Gallery](https://r-graph-gallery.com/).
+    
+    b. On rappelle que la commande `prop.table(table(x))` permet de calculer les fréquences de chaque modalité du vecteur `x` et que les fonctions `pie` et `barplot` permettent de construire respectivement un diagramme circulaire et un diagramme en barres. Les fonctions  `geom_bar` et `geom_col` du package `ggplot2` permmettent également de construire de tels graphiques.
+    
+    c. Interpréter les graphiques obtenus.
+```{r, include = F}
+## Avec les fonctions du tidyverse
+quanti <- Recensement_12 %>% select(where(is.numeric))
+quali <- Recensement_12 %>% select(where(is.factor))
+
+# Imputation de données manquantes par la moyenne dans la base quanti
+dat <- quanti %>% 
+  mutate(across(everything(), ~ zoo::na.aggregate(.x, FUN = mean)))
+
+# Color blind friendly palettes
+# execute this command only the first time you use ggpubfigs
+# devtools::install_github("JLSteenwyk/ggpubfigs")
+# load ggpubfigs
+library(ggpubfigs)
+# Making a custom wrapper for ggplot
+ggplot <- function(...) ggplot2::ggplot(...) + scale_fill_manual(values = friendly_pal("ito_seven"))
+```
+
+```{r, include = F}
+# Create a function for computing a pie chart
+mygeom_pie <- function(data, variable, slanted = F){
+  p1 <- data %>%
+    reframe(group = levels({{variable}}),
+            value = as.vector(prop.table(table({{variable}})))) %>%
+    arrange(desc(group)) %>%
+    mutate(ypos = cumsum(value)-0.5*value,
+           angle = 0)
+  if (slanted){
+    p1 <- p1 %>% mutate(
+      angle = -ypos*360+90,
+      angle = ifelse(angle< -90, angle+180, angle))
+  }
+  
+  ggplot(p1, aes(x="", y=value, fill=group)) +
+      geom_bar(stat="identity", width=1) +
+      coord_polar("y", start=0) + 
+      theme_void() +
+      # theme(legend.position="none") +
+      geom_text(aes(y = ypos, label = group, angle = angle), color = "white", size=5, check_overlap = T)
+}
+
+# Pie chart for SEXE
+quali %>% mygeom_pie(SEXE, F) +
+  ggtitle("Distribution par genre déclaré")
+
+# Create a function for computing a bar chart
+mygeom_bar <- function(data, variable, slanted = F){
+  p1 <- data %>%
+    select({{variable}}) %>%
+    count({{variable}}, .drop = F) %>%
+    mutate(n = as.numeric(n))
+  
+  myplot <- ggplot(p1, aes(x = {{variable}}, y = n/sum(n), group = {{variable}})) +
+    geom_col(aes(fill = {{variable}})) +
+    scale_y_continuous(labels = scales::percent) +
+    geom_text(aes(label = n, y = n/sum(n)+0.01),
+            vjust = "bottom", check_overlap = T) +
+    ylab("Freq")
+  
+  if (slanted){
+    myplot +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  } else{
+    myplot
+  }
+}
+
+quali %>% mygeom_bar(STAT_MARI, F) +
+  ggtitle("Distribution par statut marital")
+```
+  
+2. **Variables quantitatives**
+
+    a. Interpréter les sorties des commandes suivantes
+    
+    ```{r, results = F}
+    # Fonction summary
+    summary(dat)
+    
+    # Fonction skim du package skimr
+    skimr::skim(dat)
+    ```
+  
+    b. Taper les commandes
+    
+    ```{r, results = F}
+    var(dat[,1])
+    sum((dat[,1]-mean(dat[,1]))^2/nrow(dat))
+    ```
+    
+    Que remarquez vous ? Utiliser l'aide de la fonction `var` afin de trouver une explication et adapter la deuxième ligne le cas échéant.
+  
+    c. Pour chaque variable quantitative, choisir la représentation la plus adaptée. On pourra s'inspirer du site [R Graph Gallery](https://r-graph-gallery.com/).
+    
+    d. Suivant le type de graphique choisi, on pourra utiliser les fonctions suivantes :
+    
+    | Diagramme en barres | Histogramme | Boîte à moustaches | 
+    |:---------------------:|:-------------:|:--------------------:|
+    | `barplot` | `hist` | `boxplot` |
+    | `geom_bar` ou `geom_col` |`geom_histogram` ou `geom_density` | `geom_boxplot` |
+    
+    
+    e. Interpréter les graphiques obtenus
+  
+## Exercice 4 Statistiques descriptives bivariées
+
+*Cet exercice sera effectué sous le logiciel R.*
+
+1. Indiquer les différents types d'outils statistiques utilisés pour interpréter les liens éventuels entre 2 variables
+
+2. Parmi les variables du jeu de données `Recensement_12`, sélectionner plusieurs couples de variables et utiliser les outils statistiques adéquats afin d'interpréter leurs relations. Les commandes suivantes peuvent être utiles
+
+| Table de contingence | Corrélation | Boîte à moustaches | Nuages de points |
+|:--------------------:|:-----------:|:------------------:|:----------------:|
+| `table(x,y)` | `cov(dat)`, `cor(dat)` | `boxplot(x ~ y)` | `plot(x,y)`, `pairs(dat)` |
+| `dat %>% count(x,y)` | `corrplot(cor(dat))`  | `ggplot(dat) + geom_boxplot(aes(x, group = y))` | `ggplot(dat) + geom_point(aes(x, y))` |

@@ -4,11 +4,15 @@ output_dir: "."
 navbar:
   title: 'Enseignements'
   left:
-  - text: "Supports"
+  - text: "EMS - Analyse de données"
     icon: fa-laptop
     menu:
-    - text: "ACP"
+    - text: "Supports de cours ACP"
+      href: ./1_Cours_ACP.pdf
+    - text: "TD ACP html"
       href: ./ACP_Exemple.html
+    - text: "TP ACP html"
+      href: ./Mes Sujets TP/TP1.html
   right:
   - text: "Github"
     icon: fab fa-github

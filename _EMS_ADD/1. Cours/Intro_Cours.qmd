@@ -1,0 +1,93 @@
+---
+title: "Analyse de données et Classification"
+author: "Gaspar Massiot"
+format: 
+  revealjs:
+    smaller: true
+    theme: solarized
+---
+
+## Présentation générale
+
+En tout, 7 séances d'entre 3 et 4h chacunes pour un total de 23.5h:
+
+- 3 séances de cours
+- 4 séances de TD/TP pour appliquer les notions
+
+## Introduction : définitions
+
+**Sciences des données** (*Data Science*) : discipline dont le but est d'extraire de l'information à partir de données en utilisant des méthodes venant des mathématiques appliquées et plus particulièrement de l'apprentissage statistique, de l'informatique ou de la physique.
+
+**Apprentissage statistique** : branche récente des statistiques qui consiste à mettre en place des outils pour modéliser et comprendre des données complexes. Elle mélange des compétences en :
+
+- mathématiques appliquées (statistique et optimisation notamment) et
+- informatique (*machine learning* traduit par **apprentissage automatique**)
+
+## Apprentissage statistique
+
+L'apprentissage statistique se subdivise essentiellement en deux catégories :
+
+- l'apprentissage supervisé
+- l'apprentissage non supervisé
+
+## Apprentissage supervisé
+
+On cherche la fonction $f$ qui permettra de relier la réponse $y$ à des variables explicatives (prédicteurs) à un terme d'erreur $\varepsilon$ près. Plus précisément, on cherche à estimer $f$ telle que :
+\begin{align*}
+y=f(x_1,x_2,\ldots,x_p)+\varepsilon
+\end{align*}
+à partir d'observations $(y_1,\ldots,y_n)$ que l'on modélise comme des réalisations de variables aléatoires $Y_i$ définies par :
+\begin{align*}
+Y_i=f(x_{i,1},x_{i,2},\ldots,x_{i,p})+E_i,&\text{ pour }1\leq i\leq n,
+\end{align*}
+où $E_i$ est une variable aléatoire d'espérance nulle et de variance $\sigma^2$ modélisant l'erreur de mesure et/ou de modélisation associée à l'observation $i$ et $x_{i,1},x_{i,2},\ldots,x_{i,p}$ sont les valeurs des $p$ prédicteurs pour l'observation $i$.
+
+L'intéret de l'apprentissage supervisé est de pouvoir faire de la **prédiction** our de l'**inférence**.
+
+## Prédiction et inférence
+
+Si on sait estimer $f$ par $\hat f$, on pourra **prédire** la valeur de $Y_{n+1}$ uniquement à partir des prédicteurs $x_{n+1,1},x_{n+1,2},\ldots,x_{n+1,p}$ par
+\begin{align*}
+\hat Y_{n+1}=\hat f(x_{n+1,1},x_{n+1,2},\ldots,x_{n+1,p}).
+\end{align*}
+
+L'**inférence**, quant à elle, permet de comprendre l'influence et l'importance de chacun des $p$ prédicteurs sur la variable réponse $y$. En particulier, il sera possible d'utiliser des règles de décision telles que des tests statistiques pour mettre en évidence ou non l'effet d'un prédicteur particulier $x_k$ sur $y$
+
+## Exemple de régression linéaire
+
+## Apprentissage non supervisé
+
+On dit que l'on se trouve dans ce cas lorsque l'on dispose de plusieurs variables (prédicteurs) observées sur différents individus mais que l'on n'a pas de variable réponse associée à expliquer.
+
+On dit que l'on travaille en "non supervisé" parce que l'on ne dispose pas de variable réponse pour superviser notre analyse.
+
+Dans ce cas, les données se présentent sous forme d'un tableau :
+\begin{align*}
+\begin{pmatrix}
+x_{1,1}&x_{1,2}&\cdots&x_{1,p}\\
+x_{2,1}&x_{2,2}&\cdots&x_{2,p}\\
+\vdots&\vdots&\vdots&\vdots\\
+x_{n,1}&x_{n,2}&\cdots&x_{n,p}\\
+\end{pmatrix}
+\end{align*}
+où $x_{i,k}$ correspond à la valeur de la variable $k$ pour l'individu $i$.
+
+## Contenu du cours
+
+- Méthodes de réduction de dimension permettant de résumer l'information d'un tableau de données quantitatives, ou qualitatives $\longrightarrow$ Analyse en Composantes Principales, Analyse Factorielle des correspondances, Analyse des Composantes Multiples.
+- Méthodes de classification (*clustering*) permettant de construire des groupes d'individus selon leurs caractéristiques $\longrightarrow$ $k$-means et Classification Ascendante Hiérarchique.
+
+## Evaluation du cours
+
+- Vous serez évalués sur un rapport à réaliser en binômes.
+- Les étudiants choisiront leur sujet de projet parmi ceux qui seront proposés courant Avril.
+- La séance de 3h du Vendredi 25 Avril est réservée au suivi du projet.
+- Contenu du projet : Le rapport est à réaliser à l'aide de Quarto. On attend une analyse complète du jeu de données choisi à l'aide des outils vus en cours. Le plan attendu est le suivant : 
+  - Analyse uni et bivariée de variables choisies
+  - Utilisation d'une méthode de réduction de la dimension appropriée pour une analyse approfondie
+  - Proposition de classification des individus avec justification du choix des variables utilisées
+  - Conclusion générale sur le jeu de données
+- Seront évalués le rapport et le code ayant permis de réaliser le rapport
+  <!-- - sur la bonne utilisation des méthodes vues en cours et l'interprétation de leurs résultats. -->
+  <!-- - sur la bonne utilisation de l'outil Quarto pour rendre un rapport propre. -->
+
