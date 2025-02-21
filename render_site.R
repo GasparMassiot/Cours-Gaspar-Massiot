@@ -12,9 +12,11 @@ for (d_ in dirs){
 }
 
 for(f_ in filenames){
-  system(glue::glue( 'rm -rf {stringr::str_remove(f_, ".Rmd")}_cache'))
-  system(glue::glue( 'rm -rf {stringr::str_remove(f_, ".Rmd")}_files'))
-  rmarkdown::render(f_)
+  if (length(grep("Husson", f_))==0){
+    system(glue::glue( 'rm -rf {stringr::str_remove(f_, ".Rmd")}_cache'))
+    system(glue::glue( 'rm -rf {stringr::str_remove(f_, ".Rmd")}_files'))
+    rmarkdown::render(f_, knit_root_dir = getwd())
+  }
 }
 
 # On envoie dans le dossier du site, pour moi il se nomme build

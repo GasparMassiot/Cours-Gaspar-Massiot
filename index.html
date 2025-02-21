@@ -11,10 +11,10 @@
 
 
 
-<title>R : GMN3A</title>
+<title>R</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -30,8 +30,8 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -41,6 +41,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 
@@ -71,6 +72,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -128,11 +132,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -161,8 +169,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -170,16 +178,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -223,17 +224,17 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">GMN3A</a>
+      <a class="navbar-brand" href="index.html">Enseignements</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-laptop"></span>
      
     Supports
@@ -242,14 +243,14 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="_ACP/ACP_Exemple.html">ACP</a>
+      <a href="./ACP_Exemple.html">ACP</a>
     </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/GasparMassiot/GMN3A">
+  <a href="https://github.com/GasparMassiot/Cours-Gaspar-Massiot">
     <span class="fab fa-github"></span>
      
     Github
@@ -264,18 +265,31 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">R : GMN3A</h1>
+<h1 class="title toc-ignore">R</h1>
 
 </div>
 
 
-<div id="installation-logiciels-pour-la-formation" class="section level1">
-<h1>Installation logiciels pour la formation</h1>
-<p>Il est préférable de commencer par installer R avant d’installer RStudio. Installation de R</p>
-<p>Windows : le premier lien sur la page <a href="http://cran.r-project.org/bin/windows/base/" class="uri">http://cran.r-project.org/bin/windows/base/</a> permet de télécharger programme d’installation. Une fois le programme d’installation lancé, il suffira d’installer R avec les options par défaut.</p>
-<p>Mac OS X :les fichiers d’installation sont disponibles à <a href="http://cran.r-project.org/bin/macosx/" class="uri">http://cran.r-project.org/bin/macosx/</a>.</p>
-<p>Linux : R est disponible dans le gestionnaire de paquets, cela pouvant dépendre d’une distribution de Linux à une autre. Installation de RStudio</p>
-<p>La page <a href="http://www.rstudio.com/products/rstudio/download/" class="uri">http://www.rstudio.com/products/rstudio/download/</a> permet de télécharger la dernière version stable de Rstudio. Il faut choisir l’installateur correspondant à votre système d’exploitation et suivre la procédure.</p>
+<div id="installation-logiciels" class="section level1">
+<h1>Installation logiciels</h1>
+<p>Installation de R</p>
+<p>Windows : le premier lien sur la page <a
+href="http://cran.r-project.org/bin/windows/base/"
+class="uri">http://cran.r-project.org/bin/windows/base/</a> permet de
+télécharger programme d’installation. Une fois le programme
+d’installation lancé, il suffira d’installer R avec les options par
+défaut.</p>
+<p>Mac OS X :les fichiers d’installation sont disponibles à <a
+href="http://cran.r-project.org/bin/macosx/"
+class="uri">http://cran.r-project.org/bin/macosx/</a>.</p>
+<p>Linux : R est disponible dans le gestionnaire de paquets, cela
+pouvant dépendre d’une distribution de Linux à une autre. Installation
+de RStudio</p>
+<p>La page <a href="http://www.rstudio.com/products/rstudio/download/"
+class="uri">http://www.rstudio.com/products/rstudio/download/</a> permet
+de télécharger la dernière version stable de Rstudio. Il faut choisir
+l’installateur correspondant à votre système d’exploitation et suivre la
+procédure.</p>
 </div>
 
 
