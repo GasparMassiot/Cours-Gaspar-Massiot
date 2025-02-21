@@ -1,7 +1,7 @@
 ---
-title: "R : GMN3A"
+title: "R"
 description: |
-  Ce site contient les liens vers les données et les supports de cours pour la formation. 
+  Ce site contient les liens vers les données et les supports de cours que j'utilise dans mes formations. 
 output: 
   html_document:
    toc: false
@@ -17,9 +17,8 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-# Installation logiciels pour la formation
+# Installation logiciels
 
-Il est préférable de commencer par installer R avant d’installer RStudio.
 Installation de R
 
 Windows : le premier lien sur la page  http://cran.r-project.org/bin/windows/base/  permet de télécharger programme d’installation. Une fois le programme d’installation lancé, il suffira d’installer R avec les options par défaut.
