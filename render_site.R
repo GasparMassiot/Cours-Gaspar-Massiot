@@ -3,6 +3,7 @@
 
 # render_site, va juste render index.Rmd normalement
 rmarkdown::render_site(encoding = 'UTF-8')
+#
 
 # Pour render les fichiers Rmd des sous-dossiers
 dirs <- dir('.', pattern = "^_[^(site)]")
