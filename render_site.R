@@ -7,12 +7,8 @@ rmarkdown::render_site(encoding = 'UTF-8')
 # Pour render les fichiers Rmd des sous-dossiers
 dirs <- dir('.', pattern = "^_[^(site)]")
 filenames_rmd <- NULL
-filenames_qmd <- NULL
-filenames_pdf <- NULL
 for (d_ in dirs){
-  filenames_pdf <- c(filenames_pdf, list.files(d_, pattern = '.pdf', full.names = TRUE, recursive = T))
   filenames_rmd <- c(filenames_rmd, list.files(d_, pattern = '.Rmd', full.names = TRUE, recursive = T))
-  filenames_qmd <- c(filenames_qmd, list.files(d_, pattern = '.qmd', full.names = TRUE, recursive = T))
 }
 
 for(f_ in filenames_rmd){
@@ -21,6 +17,12 @@ for(f_ in filenames_rmd){
     system(glue::glue( 'rm -rf {stringr::str_remove(f_, ".Rmd")}_files'))
     rmarkdown::render(f_, knit_root_dir = getwd())
   }
+}
+
+dirs <- dir('.', pattern = "^_[^(site)]")
+filenames_qmd <- NULL
+for (d_ in dirs){
+  filenames_qmd <- c(filenames_qmd, list.files(d_, pattern = '.qmd', full.names = TRUE, recursive = T))
 }
 
 for(f_ in filenames_qmd){

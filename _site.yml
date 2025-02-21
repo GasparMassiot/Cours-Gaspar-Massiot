@@ -10,17 +10,17 @@ navbar:
     - text: "Supports de cours"
       menu:
       - text: "Supports de cours ACP"
-        href: ./_EMS_ADD/1. Cours/1_Cours ACP.pdf
+        href: ./_EMS_ADD/1_Cours/1_Cours_ACP.pdf
       - text: "Supports de cours AFC/ACM"
-        href: ./_EMS_ADD/1. Cours/2_Cours AFC_ACM.pdf
+        href: ./_EMS_ADD/1_Cours/2_Cours_AFC_ACM.pdf
       - text: "Supports de cours Classification"
-        href: ./_EMS_ADD/1. Cours/3_Cours Classification.pdf
+        href: ./_EMS_ADD/1_Cours/3_Cours_Classification.pdf
     - text: "Supports de TD"
       menu: 
       - text: "TP1 Rappels Statistiques Descriptives"
-        href: ./_EMS_ADD/Mes Sujets TP/TP1.html
+        href: ./_EMS_ADD/Sujets_TP/TP1.html
       - text: "TP2 Analyse Factorielle"
-        href: ./_EMS_ADD/Mes Sujets TP/TP2.html
+        href: ./_EMS_ADD/Sujets_TP/TP2.html
     - text: "Données"
       menu:
       - text: "Recensement_12.csv"
