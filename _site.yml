@@ -10,17 +10,17 @@ navbar:
     - text: "Supports de cours"
       menu:
       - text: "Supports de cours ACP"
-        href: ./_EMS_ADD/1_Cours/1_Cours_ACP.pdf
+        href: ./EMS_ADD/1_Cours/1_Cours_ACP.pdf
       - text: "Supports de cours AFC/ACM"
-        href: ./_EMS_ADD/1_Cours/2_Cours_AFC_ACM.pdf
+        href: ./EMS_ADD/1_Cours/2_Cours_AFC_ACM.pdf
       - text: "Supports de cours Classification"
-        href: ./_EMS_ADD/1_Cours/3_Cours_Classification.pdf
+        href: ./EMS_ADD/1_Cours/3_Cours_Classification.pdf
     - text: "Supports de TD"
       menu: 
       - text: "TP1 Rappels Statistiques Descriptives"
-        href: ./_EMS_ADD/Sujets_TP/TP1.html
+        href: ./EMS_ADD/Sujets_TP/TP1.html
       - text: "TP2 Analyse Factorielle"
-        href: ./_EMS_ADD/Sujets_TP/TP2.html
+        href: ./EMS_ADD/Sujets_TP/TP2.html
     - text: "Données"
       menu:
       - text: "Recensement_12.csv"
@@ -38,15 +38,15 @@ navbar:
     - text: "Supports de cours"
       menu:
       - text: "Cours 1"
-        href: ./_EMS_Sondage/Amphi_1_2024.pdf
+        href: ./EMS_Sondage/Amphi_1_2024.pdf
       - text: "Cours 2"
-        href: ./_EMS_Sondage/Amphi_2_2024.pdf
+        href: ./EMS_Sondage/Amphi_2_2024.pdf
       - text: "Cours 3"
-        href: ./_EMS_Sondage/Amphi_3_2024.pdf
+        href: ./EMS_Sondage/Amphi_3_2024.pdf
       - text: "Cours 4"
-        href: ./_EMS_Sondage/Amphi_4_2024.pdf
+        href: ./EMS_Sondage/Amphi_4_2024.pdf
       - text: "Cours 5"
-        href: ./_EMS_Sondage/Amphi_5_2024.pdf
+        href: ./EMS_Sondage/Amphi_5_2024.pdf
   right:
   - text: "Github"
     icon: fab fa-github
