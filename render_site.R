@@ -1,5 +1,5 @@
 # On créé le dossier du site au cas où (peut être pas nécessaire)
-system('mkdir -p build') 
+# dir.create(file.path(getwd(), "build"))
 
 # render_site, va juste render index.Rmd normalement
 rmarkdown::render_site(encoding = 'UTF-8')
@@ -33,12 +33,12 @@ for(f_ in filenames_qmd){
   }
 }
 
-# On envoie dans le dossier du site, pour moi il se nomme build
-dirs <- dir('.', pattern = "^_[^(site)]", full.names = T)
-
-for (d_ in dirs){
-  system( glue::glue( 'cp -rf {d_} build/. '))
-  print(d_)
-  print(list.files(d_))
-  print(list.files("build"))
-}
+# # On envoie dans le dossier du site, pour moi il se nomme build
+# dirs <- dir('.', pattern = "^_[^(site)]", full.names = T)
+# 
+# for (d_ in dirs){
+#   file.copy(d_, "build", recursive=TRUE)
+#   print(d_)
+#   print(list.files(d_))
+#   print(list.files("build"))
+# }

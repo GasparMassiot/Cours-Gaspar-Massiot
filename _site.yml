@@ -9,6 +9,8 @@ navbar:
     menu:
     - text: "Supports de cours"
       menu:
+      - text: "Introduction"
+        href: ./EMS_ADD/1_Cours/Intro_Cours.html
       - text: "Supports de cours ACP"
         href: ./EMS_ADD/1_Cours/1_Cours_ACP.pdf
       - text: "Supports de cours AFC/ACM"
