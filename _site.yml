@@ -1,18 +1,18 @@
-name: "R : GMN3A"
-title: "GMN3A"
+name: "GIT-Cours"
+title: "Enseignements"
 output_dir: "."
 navbar:
-  title: 'GMN3A'
+  title: 'Enseignements'
   left:
   - text: "Supports"
     icon: fa-laptop
     menu:
     - text: "ACP"
-      href: ACP_Exemple.html
+      href: ./ACP_Exemple.html
   right:
   - text: "Github"
     icon: fab fa-github
-    href: https://github.com/GasparMassiot/GMN3A
+    href: https://github.com/GasparMassiot/Cours-Gaspar-Massiot
 
       
 output:
